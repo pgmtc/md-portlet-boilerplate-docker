@@ -59,3 +59,12 @@ typings/
 
 # next.js build output
 .next
+
+# idea files
+.idea
+
+# dist
+dist/
+
+# as this is boilerplate, we can remove package-lock.json
+package-lock.json
