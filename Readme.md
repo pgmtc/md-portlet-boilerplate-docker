@@ -19,5 +19,5 @@ Boilerplate project for mDesktop portlet - docker container version
 ### Using different port
 `export PORT=9091 && npm start`
 
-
+Portlet will be accesible on http://localhost:9092/
 
