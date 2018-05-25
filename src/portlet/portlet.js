@@ -1,4 +1,4 @@
-import TestPortlet from './TestPortlet';
+import TestPortlet from './TestPortlet'
 export {
-    TestPortlet
+  TestPortlet
 }

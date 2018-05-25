@@ -1,17 +1,17 @@
 import express from 'express'
-import ping from './ping'
+import ping from './data'
 
-var path = require('path');
-var appDir = path.dirname(require.main.filename);
+var path = require('path')
+var appDir = path.dirname(require.main.filename)
 
-const router = express.Router();
+const router = express.Router()
 
 // Default route
-router.get('/', function(req, res, next) {
-    res.sendFile(path.join(appDir, '../../dist/portlet.js'));
+router.get('/', function (req, res, next) {
+  res.sendFile(path.join(appDir, '../../dist/portlet.js'))
 })
 
 // Add sub routes
-router.use('/ping', ping);
+router.use('/data', ping)
 
 export default router
