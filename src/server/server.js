@@ -2,12 +2,12 @@ import express from 'express'
 import cors from 'cors'
 import log from './logger'
 import routes from './routes/index'
-import MdPortletServer from "./MdPortletServer"
+import TestPortletServer from "./TestPortletServlet"
 
 const port = process.env.PORT || 8080
 const app = express()
 
-global.md = new MdPortletServer('portlet1');
+global.md = new TestPortletServer('portlet1');
 
 // Cleanup on exit
 process.on('SIGINT', ::global.md.destructor);
