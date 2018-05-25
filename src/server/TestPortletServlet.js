@@ -5,8 +5,8 @@ export default class TestPortletServer extends MdPortletServer {
   constructor() {
     super('testportlet')
     this.expose(::this.doSomeWork);
+    this.expose(::this.suicide);
 
-    // this.invoke('mdesktop.testportlet.doSomeWork', 'param1', 'param2');
     this.invocations = 0;
 
   }
@@ -15,6 +15,10 @@ export default class TestPortletServer extends MdPortletServer {
     this.invocations++;
     log.debug(`Doing some work ... ${param1}, ${param2}; total invocations = ${this.invocations}`);
     return `Join: ${param1}:${param2}`;
+  }
+
+  suicide() {
+    process.exit(1);
   }
 
 }
