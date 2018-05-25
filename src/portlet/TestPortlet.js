@@ -8,7 +8,6 @@ export default class TimePortlet extends MdPortlet {
   }
 
   loaded () {
-    setInterval(this.loadData.bind(this), 1000)
     this.loadData()
   }
 
