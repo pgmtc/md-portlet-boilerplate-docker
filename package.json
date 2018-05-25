@@ -5,8 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack",
-    "start": "babel-node src/data/server.js --presets env",
-    "dev": "nodemon src/data/server.js --exec babel-node --presets env",
+    "start": "babel-node src/server/server.js --presets env",
+    "dev": "nodemon src/server/server.js --exec babel-node --presets env",
     "standard": "standard"
   },
   "author": "",

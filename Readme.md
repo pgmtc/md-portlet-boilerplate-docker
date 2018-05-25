@@ -21,3 +21,7 @@ Boilerplate project for mDesktop portlet - docker container version
 
 Portlet will be accesible on http://localhost:9092/
 
+## Files
+Front end source files are in /src/portlet/
+
+Back end source files are in /src/server/
