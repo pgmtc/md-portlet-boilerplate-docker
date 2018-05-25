@@ -13,7 +13,6 @@ export default class TimePortlet extends MdPortlet {
   }
 
   async loadData () {
-    var data = await this.httpGet('/data')
-    this.timerElement.innerHTML = data
+    this.timerElement.innerHTML = await this.httpGet('/data')
   }
 }

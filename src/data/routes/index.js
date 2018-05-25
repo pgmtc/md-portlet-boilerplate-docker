@@ -1,8 +1,8 @@
 import express from 'express'
 import ping from './data'
 
-var path = require('path')
-var appDir = path.dirname(require.main.filename)
+let path = require('path')
+let appDir = path.dirname(require.main.filename)
 
 const router = express.Router()
 
