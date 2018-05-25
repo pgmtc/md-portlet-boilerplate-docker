@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import logger from './logger'
 import routes from './routes/index'
 
 const port = process.env.PORT || 8080
@@ -9,4 +10,4 @@ app.use(cors())
 app.use('/', routes)
 app.use(express.static('dist'))
 app.listen(port)
-console.log('Listening on port ' + port)
+logger.info('Server listening on port ' + port);
