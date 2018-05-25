@@ -1,0 +1,38 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: test-portlet
+  namespace: dev
+spec:
+  selector:
+    app: test-portlet
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-portlet
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: test-portlet
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: test-portlet
+    spec:
+      containers:
+      - name: test-portlet
+        image: eu.gcr.io/pgmtc-net/test-portlet
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+
