@@ -6,9 +6,7 @@ export default class TestPortletServer extends MdPortletServer {
     super('testportlet')
     this.expose(::this.doSomeWork);
     this.expose(::this.suicide);
-
     this.invocations = 0;
-
   }
 
   doSomeWork(param1, param2) {
@@ -18,7 +16,10 @@ export default class TestPortletServer extends MdPortletServer {
   }
 
   suicide() {
-    process.exit(1);
+    log.info(`${this.id} received suicide request. Exiting !!!`)
+    setTimeout(process.exit, 0)
+    return this.id + ' committing suicide';
+
   }
 
 }

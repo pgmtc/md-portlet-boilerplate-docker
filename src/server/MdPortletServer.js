@@ -11,9 +11,16 @@ export default class MdPortletServer {
     }
     this.id = id
     this.msgHub = new MdMessageHub(MSGHUB_ID, this.id)
-    this.msgHub.connect(MSGHUB_SERVER);
     this.invoke = this.msgHub::this.msgHub.invoke
     this.expose = this.msgHub::this.msgHub.expose
+    this.msgHub.connect(MSGHUB_SERVER).then(() => {
+      // Proxy invoke and expose methods
+    }, (err) => {
+      log.error('Error when connecting to messaging server');
+      process.exit(1)
+    })
+
+
   }
 
   destructor() {

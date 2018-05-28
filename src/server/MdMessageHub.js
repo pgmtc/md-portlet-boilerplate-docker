@@ -12,12 +12,19 @@ export default class MdMessageHub {
   }
 
   connect(msgServer) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       this.nats = NATS.connect(msgServer)
-      log.info('Connected to NATS ' + (msgServer ? msgServer : 'nats://localhost:4444'));
-      this.nats.subscribe(this.msgHubId + '', ::this.broadcastReceiveHandler);
-      this.nats.subscribe(this.msgHubId + '.' + this.clientId, ::this.messageReceiveHandler);
-      log.info('Subscribed to queue ' + this.msgHubId + '.' + this.clientId);
+      this.nats.on('error', err => {
+        log.error(err.message)
+        reject(err);
+      });
+      this.nats.on('connect', err => {
+        log.info('Connected to NATS ' + (msgServer ? msgServer : 'nats://localhost:4444'));
+        this.nats.subscribe(this.msgHubId + '', ::this.broadcastReceiveHandler);
+        this.nats.subscribe(this.msgHubId + '.' + this.clientId, ::this.messageReceiveHandler);
+        log.info('Subscribed to queue ' + this.msgHubId + '.' + this.clientId);
+        resolve();
+      })
     })
   }
 
