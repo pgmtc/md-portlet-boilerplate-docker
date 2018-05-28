@@ -18,6 +18,7 @@ process.on('uncaughtException', ::global.md.destructor);
 // Start server
 app.use(cors())
 app.use('/', routes)
+app.use('/api', global.md.getRestApi())
 app.use(express.static('dist'))
 app.listen(port, (err) => {
   if (err) {
