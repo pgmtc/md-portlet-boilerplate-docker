@@ -72,6 +72,9 @@ export default class MdMessageHub {
   }
 
   invoke(endpoint, ...parameters) {
+    if (this.invokePathPrefix) {
+      endpoint = this.invokePathPrefix + endpoint
+    }
     return new Promise((resolve, reject) => {
       this.nats.requestOne(endpoint, JSON.stringify(parameters), {max: 1}, MSGHUB_TIMEOUT, (response) => {
         var parsed;
@@ -100,5 +103,10 @@ export default class MdMessageHub {
         resolve(parsed.result);
       });
     });
+  }
+
+  setInvokePrefix(invokePathPrefix) {
+    this.invokePathPrefix = invokePathPrefix
+
   }
 }
