@@ -7,7 +7,6 @@ export default class TimePortlet extends MdPortlet {
 
     this.contentElement.appendChild(el.cr('button').txt('Call API').onClick(this.callApi.bind(this)).getElement())
     this.contentElement.appendChild(el.cr('button').txt('Call Job').onClick(this.callJob.bind(this)).getElement())
-    this.contentElement.appendChild(el.cr('button').txt('Call Http').onClick(this.callHttp.bind(this)).getElement())
     this.contentElement.appendChild(el.cr('button').txt('Broadcast (HTTP)').onClick(this.callHttpBroadcast.bind(this)).getElement())
     this.contentElement.appendChild(el.cr('button').txt('Broadcast (Ws)').onClick(this.callBroadcast.bind(this)).getElement())
     this.contentElement.appendChild(el.cr('button').txt('Emit (Ws').onClick(this.callEmit.bind(this)).getElement())
@@ -36,10 +35,6 @@ export default class TimePortlet extends MdPortlet {
       this.timerElement.innerText = 'Message from doSomeWorkAsync: ' + msg
     })
     this.timerElement.innerText = 'done: ' + res;
-  }
-
-  async callHttp () {
-    this.timerElement.innerHTML = await this.httpGet('data')
   }
 
   async callEmit() {

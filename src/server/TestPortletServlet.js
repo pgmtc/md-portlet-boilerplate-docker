@@ -1,8 +1,8 @@
-import MdPortletServer from 'md-lib/client/MdPortletServer'
+import MdPortletServer from 'md-lib/server/MdPortletServer'
 import log from './logger'
 
 export default class TestPortletServer extends MdPortletServer {
-  constructor() {
+  constructor(id, portletLocation) {
     super('test-portlet')
     this.expose(::this.doSomeWork);
     this.exposeJob(::this.doSomeWorkAsync)
