@@ -1,4 +1,4 @@
-import MdPortletServer from 'md-lib/lib/MdPortletServer'
+import MdPortletServer from 'md-lib/client/MdPortletServer'
 import log from './logger'
 
 export default class TestPortletServer extends MdPortletServer {

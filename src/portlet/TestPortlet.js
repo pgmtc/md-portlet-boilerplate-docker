@@ -1,4 +1,4 @@
-import MdPortlet from 'md-lib/lib/MdPortlet'
+import MdPortlet from 'md-lib/client/MdPortlet'
 import el from './el'
 
 export default class TimePortlet extends MdPortlet {
