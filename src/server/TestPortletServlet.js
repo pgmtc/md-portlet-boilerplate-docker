@@ -3,7 +3,7 @@ import log from './logger'
 
 export default class TestPortletServer extends MdPortletServer {
   constructor(portletLocation) {
-    super('test-portlet', portletLocation)
+    super('testPortlet', portletLocation)
     this.expose(::this.doSomeWork);
     this.exposeJob(::this.doSomeWorkAsync)
     this.expose(::this.suicide);

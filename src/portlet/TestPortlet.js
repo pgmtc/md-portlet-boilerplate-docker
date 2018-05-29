@@ -2,6 +2,9 @@ import MdPortlet from 'md-lib/client/MdPortlet'
 import el from './el'
 
 export default class TimePortlet extends MdPortlet {
+  constructor() {
+    super('testPortlet') // This must match id in the server part
+  }
   createChildren (createElement) {
     this.contentElement = createElement('div')
 
@@ -23,7 +26,6 @@ export default class TimePortlet extends MdPortlet {
   }
 
   loaded () {
-    //this.loadData()
     this.getSocket().on('response', this.wsTestMessageHandler.bind(this));
   }
 
