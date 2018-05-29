@@ -51,7 +51,7 @@ export default class TimePortlet extends MdPortlet {
   }
 
   async callBroadcast() {
-    this.broadcast('response', 'WS Broadcast Message ' + new Date());
+    this.broadcast('broadcast', 'WS Broadcast Message ' + new Date());
   }
 
 }
