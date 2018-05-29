@@ -21,7 +21,7 @@ spec:
   selector:
     matchLabels:
       app: test-portlet
-  replicas: 4
+  replicas: 1
   template:
     metadata:
       labels:
@@ -35,4 +35,6 @@ spec:
         env:
         - name: PORT
           value: "8080"
+        - name: MSGHUB_SERVER
+          value: "nats://nats:4222"
 
