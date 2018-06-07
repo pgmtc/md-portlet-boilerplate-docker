@@ -4,9 +4,18 @@ import log from './logger'
 export default class TestPortletServer extends MdPortletServer {
   constructor(portletLocation) {
     super('testPortlet', portletLocation)
+
+    // Expose method triggered via the message hub
     this.expose(::this.doSomeWork);
+    // Expose long running job triggered via the message hub
     this.exposeJob(::this.doSomeWorkAsync)
+    // Expose 'suicide' method which kills the server via message hub
     this.expose(::this.suicide);
+
+    // Expose HTTP GET method triggered via proxy on md-server
+    // Http methods are exposed with /api prefix, '/api/user-info' in this example
+    // exposePost(..), exposePut(..) and exposeDelete(..) are also available
+    this.exposeGet('/user-info', ::this.getUserInfo)
   }
 
   /* Example of sync call - see TestPortlet for how to call it */
@@ -31,11 +40,21 @@ export default class TestPortletServer extends MdPortletServer {
     job.done('job done');
   }
 
+  /* Example of remotely exposed method which kills the server (or k8s pod) */
   suicide() {
     log.info(`${this.id} received suicide request. Exiting !!!`)
     setTimeout(process.exit, 0)
     return this.id + ' committing suicide';
   }
+
+  /* Example - how to hook the portlet into REST api provided by the md-lib */
+  /* Following method also illustrates how to obtain user details passed by the proxy */
+  getUserInfo(req, res, next) {
+    let userInfo = req.header('md-user')
+    res.send(userInfo)
+  }
+
+
 }
 
 var sleep = (ms) => {
