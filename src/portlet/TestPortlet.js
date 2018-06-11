@@ -1,7 +1,7 @@
 import MdPortlet from 'md-lib/client/MdPortlet'
 import el from './el'
 
-export default class TimePortlet extends MdPortlet {
+export default class TestPortlet extends MdPortlet {
   constructor() {
     super('testPortlet') // This must match id in the server part
   }
@@ -22,7 +22,9 @@ export default class TimePortlet extends MdPortlet {
   }
 
   loaded () {
-    this.getSocket().on('broadcastResponse', this.broadcastMessageHandler.bind(this));
+    this.wsOn('broadcastResponse', this.broadcastMessageHandler.bind(this));
+    this.onRefresh(this.callJob.bind(this))
+
   }
 
   broadcastMessageHandler(msg) {
@@ -31,13 +33,13 @@ export default class TimePortlet extends MdPortlet {
   }
 
   async callApi () {
-    var res = await this.api('doSomeWork', [123, 'abc'])
+    var res = await this.apiCall('doSomeWork', [123, 'abc'])
     this.timerElement.innerText = res;
   }
 
   async callJob () {
     try {
-      var res = await this.job('doSomeWorkAsync', [456, 789], (msg) => {
+      var res = await this.apiJob('doSomeWorkAsync', [456, 789], (msg) => {
         this.timerElement.innerText = 'Message from doSomeWorkAsync: ' + msg
       })
       this.timerElement.innerText = 'done: ' + res;
